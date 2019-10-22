@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="/css/common.css"/>
+
+    <% if (activePath === '/add-product' || activePath === '/edit-product' || activePath === '/signUp'
+            || activePath === '/login' || activePath === '/forgot-password'
+            || activePath === '/reset-password') { %>
+      <link rel="stylesheet" href="/css/form.css"/>
+    <% } else if (activePath === '/' || activePath === '/admin/products') { %>
+      <link rel="stylesheet" href="/css/shop/products.css"/>
+      <link rel="stylesheet" href="/css/pagination.css"/>
+    <% } else if (activePath === '/product-details') { %>
+      <link rel="stylesheet" href="/css/shop/product-details.css"/>
+    <% } else if (activePath === '/cart') { %>
+      <link rel="stylesheet" href="/css/shop/cart.css"/>
+    <% } else if (activePath === '/orders') { %>
+      <link rel="stylesheet" href="/css/shop/orders.css"/>
+    <% } else if (activePath === '/checkout') { %>
+      <link rel="stylesheet" href="/css/shop/checkout.css"/>
+    <% } %>
+
+    <title><%= pageTitle %></title>
+  </head>
+    <body id="body">

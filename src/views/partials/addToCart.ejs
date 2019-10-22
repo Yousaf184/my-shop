@@ -1,0 +1,9 @@
+<form action="/cart" method="POST">
+  <% if (isAuthenticated && product.isInCart) { %>
+    <span class="in-cart-label">Added to cart</span>
+  <% } else if (isAuthenticated) { %>
+    <button class="btn cart-btn" href="/cart">Add To Cart</button>
+  <% } %>
+  <input type="hidden" name="productIdField" value="<%= product.id %>"/>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+</form>

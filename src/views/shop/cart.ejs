@@ -1,0 +1,64 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title">Cart</h1>
+
+    <span id="err-msg-block" class="info-msg error-msg-block"></span>
+
+    <% if (products.length > 0) { %>
+      <% for (const product of products) { %>
+        <div class="cart-product">
+          <div class="cart-product-info">
+            <img src="/<%= product.imagePath %>" alt="product image" class="cart-product-image"/>
+            <div>
+              <div class="cart-product-name">
+                <span class="product-name"><%= product.name %></span>
+              </div>
+
+              <div class="cart-product-price">
+                <span class="title">Price ($)</span>
+                <span> = &nbsp;</span>
+                <span><%= product.price %></span>
+              </div>
+
+              <div class="cart-product-quantity">
+                <span class="title">Quantity</span><span> = &nbsp;</span>
+                <span id="quantity"><%= product.quantity %></span>
+                <img src="/imgs/loading.gif" alt="loading image" class="loading-img hide" id="loading-img"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="cart-product-controls">
+            <div class="quantity-controls-container">
+              <form action="/cart/increase" method="POST" class="increase-quantity-control">
+                <button type="submit" class="btn" id="increase-btn">+</button>
+                <input type="hidden" name="productIdField" value="<%= product.productId %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              </form>
+              <form action="/cart/decrease" method="POST" class="decrease-quantity-control">
+                <button type="submit" id="decrease-btn"
+                        class="btn <%= product.quantity === 1 ? 'disable-control' : '' %>">-</button>
+                <input type="hidden" name="productIdField" value="<%= product.productId %>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              </form>
+            </div>
+            <form action="/cart/remove" method="POST" class="remove-product-control">
+              <button type="submit" class="btn">&cross;</button>
+              <input type="hidden" name="productIdField" value="<%= product.productId %>">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            </form>
+          </div>
+        </div>
+      <% } %>
+
+      <a href="/checkout" class="btn order-btn">Checkout</a>
+
+    <% } else { %>
+      <span class="info-msg error-msg-block show-msg-block">Cart is empty</p>
+    <% } %>
+
+    <script src="/js/shop/cart.js" type="module"></script>
+
+<%- include('../partials/foot.ejs') %>

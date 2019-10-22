@@ -1,0 +1,15 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="product-details-container">
+      <h1 class="product-name"><%= product.name %></h1>
+      <hr/>
+      <img class="product-image" src="/<%= product.imagePath %>" alt="product image"/>
+      <p class="product-price"><%= product.price %>$</p>
+      <p class="product-desc"><%= product.description %></p>
+    </div>
+
+    <%- include('../partials/addToCart.ejs', { product: product }) %>
+
+<%- include('../partials/foot.ejs') %>

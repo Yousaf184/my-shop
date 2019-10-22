@@ -1,0 +1,146 @@
+.edit-product-form,
+.signup-form,
+.login-form,
+.forgot-password-form,
+.password-reset-form {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 5px;
+    width: 55%;
+    margin: 0 auto;
+    box-shadow: 0.1px 0.1px 10px -2px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.edit-product-form label,
+.signup-form label,
+.login-form label,
+.forgot-password-form label,
+.password-reset-form label {
+    font-size: 1.2rem;
+    margin: 0 0 7px 0;
+}
+
+.edit-product-form input,
+.edit-product-form textarea,
+.signup-form input,
+.login-form input,
+.forgot-password-form input,
+.password-reset-form input {
+    margin: 0 0 7px 0;
+    padding: 15px;
+    outline: none;
+    border: 2px solid rgb(173, 173, 173);
+    border-radius: 5px;
+    width: 80%;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.edit-product-form #product-image-field:hover {
+    cursor: pointer;
+}
+
+.edit-product-form #product-price-field {
+    margin-bottom: 20px;
+}
+
+.edit-product-form input:focus,
+.edit-product-form textarea:focus,
+.signup-form input:focus,
+.login-form input:focus,
+.forgot-password-form input:focus,
+.password-reset-form input:focus {
+    border-color: #000;
+}
+
+.edit-product-form textarea {
+    resize: none;
+    height: 180px;
+}
+
+.edit-product-form button,
+.signup-form button,
+.login-form button,
+.forgot-password-form button,
+.password-reset-form button {
+    width: 30%;
+    margin-top: 15px;
+}
+
+.loading-img {
+    width: 25px;
+    margin: 15px 0 0 0;
+    display: none;
+}
+
+.show-loading-img {
+    display: block;
+}
+
+form input.invalid,
+form textarea.invalid {
+    border-color: red;
+}
+
+.already-registered-label,
+.not-registered-label {
+    margin-top: 15px;
+}
+
+.forgot-password-link {
+    margin-top: 10px;
+    text-decoration: none;
+    color: var(--navbar-green);
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 850px) {
+    .edit-product-form,
+    .signup-form,
+    .login-form,
+    .forgot-password-form,
+    .password-reset-form {
+        width: 65%;
+    }
+}
+
+@media (max-width: 750px) {
+    .edit-product-form,
+    .signup-form,
+    .login-form,
+    .forgot-password-form,
+    .password-reset-form {
+        width: 75%;
+    }
+}
+
+@media (max-width: 550px) {
+    .edit-product-form,
+    .signup-form,
+    .login-form,
+    .forgot-password-form,
+    .password-reset-form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 400px) {
+    .edit-product-form input,
+    .edit-product-form textarea,
+    .signup-form input,
+    .login-form input,
+    .forgot-password-form input,
+    .password-reset-form input {
+        padding: 8px;
+        width: 90%;
+        font-size: 1rem;
+    }
+}

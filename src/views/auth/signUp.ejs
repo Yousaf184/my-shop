@@ -1,0 +1,68 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title">Register Yourself</h1>
+
+    <span class="info-msg success-msg-block" id="success-msg-block">Registration successfull</span>
+
+    <form
+      action=""
+      method="POST"
+      id="signup-form"
+      class="signup-form">
+
+      <label for="user-name-field">Full Name</label>
+      <input
+        type="text"
+        id="user-name-field"
+        name="user-name-field"
+        value=""
+        required
+      />
+      <span class="error-msg NameError"></span>
+
+      <label for="user-email-field">Email</label>
+      <input
+        type="email"
+        id="user-email-field"
+        name="user-email-field"
+        value=""
+        required
+      />
+      <span class="error-msg EmailError"></span>
+
+      <label for="user-password-field">Password</label>
+      <input
+        type="password"
+        id="user-password-field"
+        name="user-password-field"
+        value=""
+        required
+      />
+      <span class="error-msg PasswordError PasswordMismatchError"></span>
+
+      <label for="user-cnf-password-field">Confirm Password</label>
+      <input
+        type="password"
+        id="user-cnf-password-field"
+        name="user-cnf-password-field"
+        value=""
+        required
+      />
+
+      <button type="submit" class="btn" id="form-submit-btn">Sign Up</button>
+
+      <img src="/imgs/loading.gif" alt="loading image" class="loading-img" id="loading-img"/>
+
+      <p class="already-registered-label">
+        Already registered?
+        <a href="/login">Login</a>
+      </p>
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    </form>
+
+    <script src="/js/auth/signup.js" type="module"></script>
+
+<%- include('../partials/foot.ejs') %>

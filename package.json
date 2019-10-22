@@ -1,0 +1,46 @@
+{
+	"name": "online-shop",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./src/index.js",
+	"scripts": {
+		"start": "node ./src/index.js",
+		"dev": "env-cmd -f ./env-variables/dev.env nodemon ./src/index.js",
+		"test": "env-cmd -f ./env-variables/test.env jest --watchAll --runInBand --verbose"
+	},
+	"jest": {
+		"testEnvironment": "node"
+	},
+	"keywords": [],
+	"author": "Yousaf Khan",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^3.0.6",
+		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"connect-flash": "^0.1.1",
+		"connect-mongodb-session": "^2.2.0",
+		"csurf": "^1.10.0",
+		"ejs": "^2.6.2",
+		"express": "^4.17.1",
+		"express-session": "^1.16.2",
+		"helmet": "^3.20.0",
+		"moment": "^2.24.0",
+		"mongoose": "^5.6.9",
+		"multer": "^1.4.2",
+		"nodemailer": "^6.3.0",
+		"nodemailer-sendgrid-transport": "^0.2.0",
+		"pdfmake": "^0.1.58",
+		"stripe": "^7.8.0",
+		"svg-to-pdfkit": "^0.1.7",
+		"uuid": "^3.3.2",
+		"validator": "^11.1.0"
+	},
+	"devDependencies": {
+		"cheerio": "^1.0.0-rc.3",
+		"env-cmd": "^9.0.3",
+		"jest": "^24.9.0",
+		"nodemon": "^1.19.1",
+		"supertest": "^4.0.2"
+	}
+}

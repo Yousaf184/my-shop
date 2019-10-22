@@ -1,0 +1,48 @@
+<nav class="navbar">
+  <div id="navbar-first-child">
+    <a href="/"
+       class="<%= activePath === '/' || activePath === '/product-details' ? 'active' : '' %>">
+       Products
+    </a>
+
+    <div class="collapsible-nav" id="collapsible-nav-1">
+      <% if (isAuthenticated) { %>
+        <a href="/cart" class="<%= activePath === '/cart' ? 'active' : '' %> cart-link">
+          Cart
+          <% if (typeof cartItemCount !== 'undefined' && cartItemCount !== null && cartItemCount > 0) { %>
+            <span><%= cartItemCount %></span>
+          <% } %>
+        </a>
+        <a href="/orders" class="<%= activePath === '/orders' ? 'active' : '' %>">My Orders</a>
+      <% } %>
+
+      <% if (isAuthenticated && isAdmin) { %>
+        <a href="/admin/add-product" class="<%= activePath === '/add-product' ? 'active' : '' %>">
+          Add Product
+        </a>
+        <a href="/admin/products" class="<%= activePath === '/admin/products' ? 'active' : '' %>">
+          Admin Products
+        </a>
+      <% } %>
+    </div>
+  </div>
+
+  <div id="navbar-last-child">
+    <div class="collapsible-nav" id="collapsible-nav-2">
+      <% if (!isAuthenticated) { %>
+        <a href="/login" class="<%= activePath === '/login' ? 'active' : '' %>">Login</a>
+        <a href="/signup" class="no-right-margin <%= activePath === '/signUp' ? 'active' : '' %>">Sign up</a>
+        <% } else if (isAuthenticated) { %>
+          <a href="/logout" class="no-right-margin <%= activePath === '/logout' ? 'active' : '' %>">Logout</a>
+      <% } %>
+    </div>
+
+    <div class="hamburger-btn" id="hamburger-btn">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+<!-- collapsible nav container, will be inserted here via javascript-->
+<div class="collapsed-nav-placeholder" id="collapsed-nav-placeholder"></div>

@@ -1,0 +1,35 @@
+<section class="pagination-container">
+  <a
+  href="<%= activePath %>?page=<%= currentPage - 1 %>"
+    class="previous-btn <%= currentPage === 1 ? 'disabled' : '' %>"
+    onclick="return " + <%= currentPage === 1 ? false : true %>>
+    &lt;
+  </a>
+  <% if (currentPage !== 1) { %>
+    <a class="pagination-link" href="<%= activePath %>?page=1">1</a>
+  <% } %>
+  <% if (currentPage > 3) { %>
+    <span>.....</span>
+  <% } %>
+  <% if (previousPage > 1) { %>
+    <a class="pagination-link" href="<%= activePath %>?page=<%=previousPage%>"><%= previousPage %></a>
+  <% } %>
+  <a class="pagination-link currentPage" href="<%= activePath %>?page=<%= currentPage%>">
+    <%= currentPage%>
+  </a>
+  <% if (currentPage !== lastPage && nextPage !== lastPage) { %>
+    <a class="pagination-link" href="<%= activePath %>?page=<%= nextPage%>"><%= nextPage %></a>
+  <% } %>
+  <% if ((lastPage - nextPage) > 1) { %>
+    <span>.....</span>
+  <% } %>
+  <% if (lastPage !== currentPage) { %>
+    <a class="pagination-link" href="<%= activePath %>?page=<%= lastPage %>"><%= lastPage %></a>
+  <% } %>
+  <a
+    href="<%= activePath %>?page=<%= currentPage + 1 %>"
+    class="next-btn <%= currentPage === lastPage ? 'disabled' : '' %>"
+    onclick="return " + <%= currentPage === lastPage ? false : true %>>
+    &gt;
+  </a>
+</section>

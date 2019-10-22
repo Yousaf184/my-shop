@@ -1,0 +1,67 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title">Checkout</h1>
+
+    <span class="info-msg error-msg-block" id="msg-block"></span>
+
+    <% if (productsArr.length > 0) { %>
+      <section class="checkout-products-container">
+        <% for (let product of productsArr) { %>
+          <div class="checkout-product">
+            <img src="/<%= product.image %>" alt="product image"/>
+            <div class="checkout-product-info-container">
+              <div class="product-name-container">
+                <span class="name"><%= product.name %></span>
+              </div>
+
+              <div class="product-price-container">
+                <span class="price-label">Price ($)</span>
+                <span> = </span>
+                <span><%= product.price %></span>
+              </div>
+
+              <div class="product-quantity-container">
+                <span class="quantity-label">Quantity</span>
+                <span> = </span>
+                <span id="quantity"><%= product.quantity %></span>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </section>
+
+      <section class="grand-total-container">
+        <span class="total-label">Grand Total ($) = </span>
+        <span class="total"><%= grandTotal %></span>
+      </section>
+
+      <section>
+        <form action="/order" method="post" id="payment-form" class="payment-form">
+          <div class="form-row">
+            <label for="card-element">
+              Credit or debit card
+            </label>
+            <div id="card-element">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+
+            <!-- Used to display Element errors. -->
+            <div id="card-errors" role="alert"></div>
+          </div>
+
+          <button class="btn" id="payment-btn">Submit Payment</button>
+
+          <img src="/imgs/loading.gif" alt="loading image" class="loading-img" id="loading-img"/>
+        </form>
+      </section>
+
+    <% } else { %>
+      <span class="info-msg error-msg-block show-msg-block">No products to checkout</span>
+    <% } %>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/js/shop/checkout.js" type="module"></script>
+
+<%- include('../partials/foot.ejs') %>

@@ -1,0 +1,53 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title">Orders History</h1>
+
+    <% if (orders.length > 0) { %>
+      <section class="orders">
+        <% for (const order of orders) { %>
+          <div class="single-order">
+            <div class="single-order-header">
+              <div>
+                <h3 class="order-number">Order Number: #<%= order.orderNumber %></h3>
+                <a href="/invoice/<%= order.orderNumber%>" class="invoice-link">&rArr; Order Invoice</a>
+              </div>
+              <span class="order-date"><%= order.createdAt %></span>
+            </div>
+
+            <h3 class="product-header">Products</h3>
+
+            <div class="order-products">
+              <% for (product of order.products) { %>
+                <div class="single-product">
+                  <div class="name-column">
+                    <p class="head left-aligned-text">Name</p>
+                    <p class="left-aligned-text"><%= product.name %></p>
+                  </div>
+                  <div class="quantity-price-container">
+                    <div class="price-column">
+                      <p class="head">Price ($)</p>
+                      <p><%= product.price %></p>
+                    </div>
+                    <div>
+                      <p class="head">Quantity</p>
+                      <p><%= product.quantity %></p>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+
+            <div class="grand-total-container">
+              <p><strong>Grand Total ($)</strong> = <%= order.grandTotal %></p>
+            </div>
+          </div>
+        <% } %>
+      </section>
+
+    <% } else { %>
+      <span class="info-msg error-msg-block show-msg-block">No orders history found</span>
+    <% } %>
+
+<%- include('../partials/foot.ejs') %>

@@ -1,0 +1,146 @@
+.checkout-product {
+    display: flex;
+    padding: 20px 55px;
+    border-bottom: 3px solid #eee;
+}
+
+.checkout-product img {
+    width: 90px;
+    height: 90px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.checkout-product-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name-container {
+    margin-bottom: 7px;
+}
+
+.price-label,
+.quantity-label {
+    font-weight: 600;
+}
+
+.product-name-container .name {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.grand-total-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px -0.8px rgba(0, 0, 0, 0.3);
+    margin: 25px auto 0;
+    padding: 15px 5px;
+    width: 50%;
+    border-radius: 4px;
+}
+
+.total-label {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.total {
+    font-size: 1.2rem;
+    padding-left: 4px;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    margin: 50px auto 5px;
+    box-shadow: 0 0 5px -0.8px rgba(0, 0, 0, 0.3);
+    padding: 20px 15px 15px;
+    border-radius: 4px;
+}
+
+.payment-form label {
+    color: rgb(160, 159, 159);
+    margin: 0 0 7px;
+}
+
+.payment-form .btn {
+    background-color: rgb(39, 119, 238);
+    border-color: rgb(39, 119, 238);
+    color: #fff;
+    width: 50%;
+    margin: 10px auto 0;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.payment-form .btn:hover {
+    background-color: rgb(39, 119, 220);
+    border-color: rgb(39, 119, 220);
+    box-shadow: none;
+}
+
+.form-row {
+    width: 100%;
+}
+
+#card-errors {
+    color: red;
+    margin: 10px 0;
+}
+
+.loading-img {
+    width: 25px;
+    display: block;
+    margin: 20px auto 0;
+    display: none;
+}
+
+.show-loading-img {
+    display: block;
+}
+
+@media (max-width: 550px) {
+    .payment-form {
+        width: 80%;
+    }
+
+    .payment-form .btn {
+        width: 70%;
+    }
+
+    .grand-total-container {
+        width: 80%;
+    }
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+ .StripeElement {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 18px 15px;
+    margin: 8px 0 0 0;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.payment-form--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.payment-form--invalid {
+    border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+}

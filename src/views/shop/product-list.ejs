@@ -1,0 +1,31 @@
+<%- include('../partials/head.ejs') %>
+
+    <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title">Products</h1>
+
+    <% if (productsArr.length > 0) { %>
+      <section class="products-container">
+        <% for (let product of productsArr) { %>
+          <div class="product">
+            <img src="<%= product.imagePath %>" placeholder="product"/>
+            <div>
+              <a class="product-name" href="/products/<%= product._id %>">
+                <%= product.name %>
+              </a>
+              <p class="product-price"><%= product.price %>$</p>
+              <p class="product-desc"><%= product.description %></p>
+
+              <%- include('../partials/addToCart.ejs', { product: product }) %>
+            </div>
+          </div>
+        <% } %>
+      </section>
+
+      <%- include('../partials/pagination.ejs') %>
+
+    <% } else { %>
+      <span class="info-msg error-msg-block show-msg-block">No products found</span>
+    <% } %>
+
+<%- include('../partials/foot.ejs') %>

@@ -1,0 +1,75 @@
+<%- include('../partials/head.ejs') %>
+
+  <%- include('../partials/navbar.ejs') %>
+
+    <h1 class="page-title"><%= pageTitle %></h1>
+
+    <span class="info-msg success-msg-block" id="success-msg-block">Product added successfully</span>
+
+    <form
+      action="/admin<%= editMode ? '/edit-product' : '/add-product' %>"
+      method="POST"
+      enctype="multipart/form-data"
+      id="edit-product-form"
+      class="edit-product-form <%= editMode ? 'edit' : 'add' %>">
+
+      <label for="product-name-field">Name</label>
+      <input
+        type="text"
+        id="product-name-field"
+        name="product-name-field"
+        value="<%= editMode ? product.name : ''%>"
+        required
+      />
+      <span class="error-msg ProductNameError"></span>
+
+      <label for="product-image-field">Image</label>
+      <% if (!editMode) { %>
+        <input
+          type="file"
+          id="product-image-field"
+          name="product-image-field"
+          required
+        />
+      <% } else { %>
+        <input
+          type="file"
+          id="product-image-field"
+          name="product-image-field"
+        />
+      <% } %>
+      <span class="error-msg FileUploadError"></span>
+
+      <label for="product-price-field">Price</label>
+      <input
+        type="number"
+        id="product-price-field"
+        name="product-price-field"
+        step="0.01"
+        value="<%= editMode ? product.price : ''%>"
+        required
+      />
+
+      <label for="product-description-field">Description</label>
+      <textarea
+        name="product-description-field"
+        id="product-description-field"
+        required><%= editMode ? product.description : ''%></textarea>
+      <span class="error-msg ProductDescError"></span>
+
+      <!-- will be used to pass product id to the controller to update the product when in edit mode-->
+      <% if (editMode) { %>
+        <input type="hidden" name="productIdField" value="<%= product._id %>"/>
+      <% } %>
+
+      <button type="submit" class="btn" id="form-submit-btn">
+        <%= editMode ? 'Update Product' : 'Add Product' %>
+      </button>
+      <img src="/imgs/loading.gif" alt="loading image" class="loading-img" id="loading-img"/>
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrfField">
+    </form>
+
+    <!-- works with both edit product and add product forms -->
+    <script src="/js/admin/edit-product.js" type="module"></script>
+<%- include('../partials/foot.ejs') %>

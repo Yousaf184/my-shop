@@ -1,0 +1,94 @@
+.page-title {
+    margin-bottom: 0;
+}
+
+.products-container {
+    display: grid;
+    grid-gap: 30px 10px;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    padding: 20px 15px;
+}
+
+.product button {
+    font-size: 0.8rem;
+}
+
+.product {
+    width: 85%;
+    max-width: 285px;
+    border-radius: 3px;
+    box-shadow: 0.1px 0.1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.product img {
+    height: 200px;
+}
+
+.product div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 10px;
+}
+
+.product .btns-container {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0;
+}
+
+.product .btns-container a {
+    padding: 10px 10px;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.btns-container a:first-child {
+    margin-right: 15px;
+}
+
+.btns-container .delete-btn {
+    color: var(--delete-red);
+    border-color: var(--delete-red);
+}
+
+.btns-container .delete-btn:hover {
+    background-color: var(--delete-hover-red);
+    color: #fff;
+}
+
+.product div p:nth-child(3) {
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.product-name {
+    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+    color: var(--navbar-green);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.product-name:hover {
+    text-decoration: underline;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.product-desc {
+    margin: 0 0 10px 0;
+}
+
+.product img {
+    width: 100%;
+}

@@ -1,0 +1,111 @@
+body {
+    background-color: #eee;
+}
+
+.single-order {
+    padding: 20px 25px;
+    margin: 20px 20px 35px;
+    box-shadow: 0.1px 0.1px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.single-order .product-header {
+    margin: 10px 0 15px;
+}
+
+.single-product {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    box-shadow: 0.1px 0.1px 5px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.single-product:last-child {
+    margin-bottom: 0;
+}
+
+.quantity-price-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-column {
+    margin-right: 35px;
+}
+
+.head {
+    font-weight: bold;
+    text-align: center;
+}
+
+.name-column .left-aligned-text {
+    text-align: left;
+}
+
+.head ~ p {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.single-order-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-number {
+    margin-bottom: 5px;
+}
+
+.order-date {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9rem;
+}
+
+.invoice-link {
+    text-decoration: none;
+    color: var(--navbar-green);
+    position: relative;
+}
+
+.invoice-link:hover {
+    text-decoration: underline;
+}
+
+.grand-total-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    font-size: 1.08rem;
+}
+
+@media (max-width: 575px) {
+    .order-number {
+        font-size: 0.9rem;
+    }
+
+    .order-date {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .single-order-header {
+        flex-direction: column;
+    }
+
+    .order-date {
+        margin-top: 7px;
+    }
+
+    .single-product {
+        padding: 15px;
+        flex-direction: column;
+    }
+
+    .name-column {
+        margin-bottom: 10px;
+    }
+}

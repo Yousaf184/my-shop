@@ -1,0 +1,35 @@
+.product-details-container .product-name,
+.product-details-container .product-price,
+.product-details-container .product-desc {
+    text-align: center;
+    margin: 18px 5px;
+}
+
+.product-details-container .product-image {
+    width: 250px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 5px;
+}
+
+.product-details-container .product-price {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.product-details-container .product-desc {
+    font-size: 1.2rem;
+}
+
+.cart-btn {
+    margin: 25px auto;
+    display: block;
+    width: 130px;
+    text-align: center;
+}
+
+.in-cart-label {
+    display: block;
+    text-align: center;
+    font-size: 1.3rem;
+}

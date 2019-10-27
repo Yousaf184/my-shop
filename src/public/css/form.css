@@ -1,8 +1,4 @@
-.edit-product-form,
-.signup-form,
-.login-form,
-.forgot-password-form,
-.password-reset-form {
+form {
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -10,64 +6,48 @@
     align-items: center;
     padding: 20px 5px;
     width: 55%;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     box-shadow: 0.1px 0.1px 10px -2px rgba(0, 0, 0, 0.4);
     border-radius: 5px;
 }
 
-.edit-product-form label,
-.signup-form label,
-.login-form label,
-.forgot-password-form label,
-.password-reset-form label {
-    font-size: 1.2rem;
+form label {
+    font-size: 1.5rem;
     margin: 0 0 7px 0;
 }
 
-.edit-product-form input,
-.edit-product-form textarea,
-.signup-form input,
-.login-form input,
-.forgot-password-form input,
-.password-reset-form input {
-    margin: 0 0 7px 0;
-    padding: 15px;
+form input,
+form textarea {
+    margin: 0;
+    padding: 8px 15px;
     outline: none;
     border: 2px solid rgb(173, 173, 173);
     border-radius: 5px;
     width: 80%;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
 }
 
-.edit-product-form #product-image-field:hover {
+form #product-image-field:hover {
     cursor: pointer;
 }
 
-.edit-product-form #product-price-field {
+form #product-price-field {
     margin-bottom: 20px;
 }
 
-.edit-product-form input:focus,
-.edit-product-form textarea:focus,
-.signup-form input:focus,
-.login-form input:focus,
-.forgot-password-form input:focus,
-.password-reset-form input:focus {
+form input:focus,
+form textarea:focus {
     border-color: #000;
 }
 
-.edit-product-form textarea {
+form textarea {
     resize: none;
     height: 180px;
 }
 
-.edit-product-form button,
-.signup-form button,
-.login-form button,
-.forgot-password-form button,
-.password-reset-form button {
+form button {
     width: 30%;
     margin-top: 15px;
 }
@@ -81,7 +61,6 @@
 .show-loading-img {
     display: block;
 }
-
 form input.invalid,
 form textarea.invalid {
     border-color: red;
@@ -103,44 +82,28 @@ form textarea.invalid {
 }
 
 @media (max-width: 850px) {
-    .edit-product-form,
-    .signup-form,
-    .login-form,
-    .forgot-password-form,
-    .password-reset-form {
+    form {
         width: 65%;
     }
 }
 
 @media (max-width: 750px) {
-    .edit-product-form,
-    .signup-form,
-    .login-form,
-    .forgot-password-form,
-    .password-reset-form {
+    form {
         width: 75%;
     }
 }
 
 @media (max-width: 550px) {
-    .edit-product-form,
-    .signup-form,
-    .login-form,
-    .forgot-password-form,
-    .password-reset-form {
+    form {
         width: 90%;
     }
 }
 
 @media (max-width: 400px) {
-    .edit-product-form input,
-    .edit-product-form textarea,
-    .signup-form input,
-    .login-form input,
-    .forgot-password-form input,
-    .password-reset-form input {
+    form input,
+    form textarea {
         padding: 8px;
         width: 90%;
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 }

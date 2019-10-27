@@ -33,13 +33,32 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
     $form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // when $form is either add product form or edit product form then
+        // if tinyMCE editor is empty, show error message about required field.
+        //
+        // this is needed because textarea that is replaced by tinyMCE editor
+        // doesn't have 'required' attribute so when form submit button is clicked,
+        // it will submit the form.
+        //
+        // So to indicate to user that product description is required field,
+        // show the error message
+        if (
+            $form.classList.contains('add-product-form') ||
+            $form.classList.contains('edit-product-form') &&
+            tinymce.activeEditor.getContent({ format: 'text' }).trim() === ''
+        ) {
+            const $productDescError = document.getElementById('product-desc-error');
+            $productDescError.classList.add('show-error-msg');
+            $productDescError.textContent = 'product description is required';
+            return;
+        }
+
         // disable submit btn and show loading image
         toggleSubmitBtnAndLoadingImg($form);
         // remove form's invalid state if form was invalid before submission
         removeFormInvalidState($form);
 
         const form = new FormData($form);
-
         const request = {
             method: 'POST',
             body: form
@@ -55,7 +74,6 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
         try {
             let response = await fetch(requestUrl, request);
             response = await response.json();
-
             // enable submit btn and hide loading image
             toggleSubmitBtnAndLoadingImg($form);
 
@@ -67,9 +85,7 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
             }
 
             // if callback paramter isn't null
-            if (callback) {
-                callback(response);
-            }
+            if (callback) callback(response);
 
         } catch (error) {
             console.log(error);
@@ -82,12 +98,15 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
 export const removeInvalidState = (e) => {
     e.target.classList.remove('invalid');
 
-    const $errorMsgBlock = e.target.nextElementSibling;
-    $errorMsgBlock.classList.remove('show-msg-block');
+    const $errorMsg = e.target.nextElementSibling;
 
-    if ($errorMsgBlock.nodeName === 'SPAN') {
-        $errorMsgBlock.textContent = '';
+    if ($errorMsg.nodeName === 'SPAN') {
+        $errorMsg.textContent = '';
+        $errorMsg.classList.remove('show-error-msg');
+        return;
     }
+
+    $errorMsg.classList.remove('show-msg-block');
 };
 
 function toggleSubmitBtnAndLoadingImg($form) {

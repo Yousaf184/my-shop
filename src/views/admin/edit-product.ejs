@@ -11,7 +11,7 @@
       method="POST"
       enctype="multipart/form-data"
       id="edit-product-form"
-      class="edit-product-form <%= editMode ? 'edit' : 'add' %>">
+      class="<%= editMode ? 'edit-product-form' : 'add-product-form' %>">
 
       <label for="product-name-field">Name</label>
       <input
@@ -32,6 +32,7 @@
           required
         />
       <% } else { %>
+        <!-- image field in edit mode isn't required-->
         <input
           type="file"
           id="product-image-field"
@@ -54,8 +55,8 @@
       <textarea
         name="product-description-field"
         id="product-description-field"
-        required><%= editMode ? product.description : ''%></textarea>
-      <span class="error-msg ProductDescError"></span>
+        style="width: 80%;"><%= editMode ? product.description : ''%></textarea>
+      <span class="error-msg ProductDescError" id="product-desc-error"></span>
 
       <!-- will be used to pass product id to the controller to update the product when in edit mode-->
       <% if (editMode) { %>
@@ -70,6 +71,13 @@
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="csrfField">
     </form>
 
+    <!-- tinyMCE editor CDN -->
+    <script
+      src="https://cdn.tiny.cloud/1/gn38uo37vdfe6crfnd1ldnmlcmu3mls8eziv0kbl5axi4iob/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin">
+    </script>
+    <!-- initialize tinyMCE editor -->
+    <script src="/js/admin/tiny-mce.js"></script>
     <!-- works with both edit product and add product forms -->
     <script src="/js/admin/edit-product.js" type="module"></script>
 <%- include('../partials/foot.ejs') %>

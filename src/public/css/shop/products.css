@@ -11,7 +11,7 @@
 }
 
 .product button {
-    font-size: 0.8rem;
+    font-size: 1.3rem;
 }
 
 .product {
@@ -41,8 +41,6 @@
 
 .product .btns-container a {
     padding: 10px 10px;
-    font-size: 1rem;
-    text-decoration: none;
 }
 
 .btns-container a:first-child {
@@ -68,7 +66,7 @@
 }
 
 .product-name {
-    font-size: 1.3rem;
+    font-size: 2rem;
     margin: 0 0 8px 0;
     color: var(--navbar-green);
     cursor: pointer;
@@ -80,13 +78,9 @@
 }
 
 .product-price {
-    font-size: 1.2rem;
+    font-size: 2.3rem;
     font-weight: bold;
     margin: 0 0 8px 0;
-}
-
-.product-desc {
-    margin: 0 0 10px 0;
 }
 
 .product img {

@@ -6,9 +6,13 @@
     --delete-hover-red: #f30029;
 }
 
+html {
+    font-size: 10px;
+}
+
 body {
     margin: 0;
-    font-family: 'Gill Sans', 'Trebuchet MS', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 p, h1, h3 {
@@ -37,7 +41,7 @@ p, h1, h3 {
 .navbar a {
     text-decoration: none;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     position: relative;
     margin-right: 45px;
 }
@@ -66,11 +70,11 @@ p, h1, h3 {
 .cart-link span {
     position: absolute;
     top: -10px;
-    right: -23px;
+    right: -26px;
     background-color: rgb(11, 77, 2);
     border-radius: 100%;
-    padding: 4px 7px;
-    font-size: 0.7rem;
+    padding: 4px 10px;
+    font-size: 1rem;
 }
 
 /****************** Collapsed Navbar ***************/
@@ -117,10 +121,11 @@ p, h1, h3 {
 .collapsed-nav-placeholder a {
     text-decoration: none;
     color: #fff;
-    margin: 10px 5px;
+    margin: 8px 5px;
     padding: 10px 5px;
     transition: all 0.13s linear;
     border-radius: 4px;
+    font-size: 1.5rem;
 }
 
 .collapsed-nav-placeholder a:hover,
@@ -130,19 +135,19 @@ p, h1, h3 {
 }
 
 .open-collapsed-navbar {
-    /* max-height: 400px; */
     transform: translateY(0);
 }
 
 .page-title {
     text-align: center;
     margin: 25px 0 20px;
+    font-size: 3rem;
 }
 
 button.btn,
 a.btn {
     padding: 12px 10px;
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     cursor: pointer;
     background-color: #fff;
     color: var(--navbar-green);
@@ -170,8 +175,9 @@ button.btn.disable-control {
     display: block;
     transition: opacity 0.3s ease;
     opacity: 0;
-    margin: 0 0 12px 0;
+    margin: 6px 0 5px;
     text-align: center;
+    font-size: 1.4rem;
 }
 
 .show-error-msg {
@@ -182,7 +188,7 @@ button.btn.disable-control {
     margin: 10px auto 30px;
     text-align: center;
     padding: 15px 20px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     display: none;
 }
 
@@ -205,13 +211,13 @@ button.btn.disable-control {
 .page-not-found,
 .server-error-label {
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     padding: 25px 5px 0;
 }
 
 .in-cart-label {
     color: var(--navbar-green);
-    font-size: 1.03rem;
+    font-size: 1.5rem;
     padding: 10px 5px 0;
 }
 

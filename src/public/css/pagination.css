@@ -10,11 +10,11 @@
 .next-btn {
     border: 2px solid #eee;
     border-radius: 50%;
-    padding: 8px 11px;
+    padding: 8px 15px;
     text-decoration: none;
     margin: 0 5px;
     color: var(--navbar-green);
-    font-size: 0.9rem;
+    font-size: 1.5rem;
 }
 
 .pagination-link:hover,

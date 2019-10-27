@@ -7,9 +7,13 @@
       <hr/>
       <img class="product-image" src="/<%= product.imagePath %>" alt="product image"/>
       <p class="product-price"><%= product.price %>$</p>
-      <p class="product-desc"><%= product.description %></p>
+      <%- include('../partials/addToCart.ejs', { product: product }) %>
+
+      <hr>
+
+      <h1 class="description-heading">Description</h1>
+      <div class="product-desc"><%- product.description %></div>
     </div>
 
-    <%- include('../partials/addToCart.ejs', { product: product }) %>
 
 <%- include('../partials/foot.ejs') %>

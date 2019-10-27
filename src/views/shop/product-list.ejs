@@ -14,8 +14,6 @@
                 <%= product.name %>
               </a>
               <p class="product-price"><%= product.price %>$</p>
-              <p class="product-desc"><%= product.description %></p>
-
               <%- include('../partials/addToCart.ejs', { product: product }) %>
             </div>
           </div>

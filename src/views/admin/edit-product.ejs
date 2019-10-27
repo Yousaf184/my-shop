@@ -13,49 +13,52 @@
       id="edit-product-form"
       class="<%= editMode ? 'edit-product-form' : 'add-product-form' %>">
 
-      <label for="product-name-field">Name</label>
       <input
         type="text"
         id="product-name-field"
         name="product-name-field"
         value="<%= editMode ? product.name : ''%>"
+        placeholder="Name"
         required
       />
       <span class="error-msg ProductNameError"></span>
 
-      <label for="product-image-field">Image</label>
-      <% if (!editMode) { %>
+      <div class="horizontal-form-container">
+        <div>
+          <% if (!editMode) { %>
+            <input
+              type="file"
+              id="product-image-field"
+              name="product-image-field"
+              placeholder="choose image"
+              required
+            />
+          <% } else { %>
+            <!-- image field in edit mode isn't required-->
+            <input
+              type="file"
+              id="product-image-field"
+              name="product-image-field"
+              placeholder="choose image"
+            />
+          <% } %>
+          <span class="error-msg FileUploadError"></span>
+        </div>
+
         <input
-          type="file"
-          id="product-image-field"
-          name="product-image-field"
+          type="number"
+          id="product-price-field"
+          name="product-price-field"
+          step="0.01"
+          value="<%= editMode ? product.price : ''%>"
+          placeholder="price"
           required
         />
-      <% } else { %>
-        <!-- image field in edit mode isn't required-->
-        <input
-          type="file"
-          id="product-image-field"
-          name="product-image-field"
-        />
-      <% } %>
-      <span class="error-msg FileUploadError"></span>
+      </div>
 
-      <label for="product-price-field">Price</label>
-      <input
-        type="number"
-        id="product-price-field"
-        name="product-price-field"
-        step="0.01"
-        value="<%= editMode ? product.price : ''%>"
-        required
-      />
-
-      <label for="product-description-field">Description</label>
       <textarea
         name="product-description-field"
-        id="product-description-field"
-        style="width: 80%;"><%= editMode ? product.description : ''%></textarea>
+        id="product-description-field"><%= editMode ? product.description : ''%></textarea>
       <span class="error-msg ProductDescError" id="product-desc-error"></span>
 
       <!-- will be used to pass product id to the controller to update the product when in edit mode-->

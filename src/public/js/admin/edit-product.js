@@ -1,9 +1,6 @@
 import { addFormSubmitEventListener, removeInvalidState } from '../utils.js';
 
 const $editProductForm = document.getElementById('edit-product-form');
-const $productDescError = document.getElementById('product-desc-error');
-const $productDescField = document.getElementById('product-description-field');
-const $formSubmitBtn = document.getElementById('form-submit-btn');
 let requestUrl;
 const isAddProductForm = $editProductForm.classList.contains('add-product-form');
 

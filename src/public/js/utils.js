@@ -43,8 +43,8 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
         // So to indicate to user that product description is required field,
         // show the error message
         if (
-            $form.classList.contains('add-product-form') ||
-            $form.classList.contains('edit-product-form') &&
+            ($form.classList.contains('add-product-form') ||
+            $form.classList.contains('edit-product-form')) &&
             tinymce.activeEditor.getContent({ format: 'text' }).trim() === ''
         ) {
             const $productDescError = document.getElementById('product-desc-error');

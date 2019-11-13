@@ -5,7 +5,7 @@
     <h1 class="page-title">Products</h1>
 
     <% if (productsArr.length > 0) { %>
-      <section class="products-container">
+      <section class="products-container products-container-admin" id="products-container">
         <% for (let product of productsArr) { %>
           <div class="product">
             <img src="/<%= product.imagePath %>" placeholder="product"/>
@@ -14,9 +14,19 @@
               <p class="product-price"><%= product.price %>$</p>
             </div>
             <div class="btns-container">
-              <a href="/admin/edit-product/<%= product._id%>" class="btn">Edit</a>
+              <%- include('../partials/button-link.ejs', {
+                  btnLabel: 'Edit',
+                  link: `/admin/edit-product/`,
+                  productId: product._id
+                })
+              %>
               <form action="/admin/delete-product" method="POST">
-                <button type="submit" class="btn delete-btn">Delete</button>
+                <%- include('../partials/button.ejs', {
+                    type: 'submit',
+                    btnLabel: 'Delete',
+                    btnId: 'delete-product-btn'
+                  })
+                %>
                 <input type="hidden" name="productIdField" value="<%= product._id %>">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
               </form>
@@ -25,10 +35,12 @@
         <% } %>
       </section>
 
-      <%- include('../partials/pagination.ejs') %>
+    <%- include('../partials/pagination.ejs') %>
 
     <% } else { %>
       <span class="info-msg error-msg-block show-msg-block">No products found</span>
     <% } %>
+
+    <script src="/js/product.js"></script>
 
 <%- include('../partials/foot.ejs') %>

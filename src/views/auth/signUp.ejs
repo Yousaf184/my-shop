@@ -7,7 +7,7 @@
     <span class="info-msg success-msg-block" id="success-msg-block">Registration successfull</span>
 
     <form
-      action=""
+      action="/signup"
       method="POST"
       id="signup-form"
       class="signup-form">
@@ -51,9 +51,12 @@
         required
       />
 
-      <button type="submit" class="btn" id="form-submit-btn">Sign Up</button>
-
-      <img src="/imgs/loading.gif" alt="loading image" class="loading-img" id="loading-img"/>
+      <%- include('../partials/button.ejs', {
+          type: 'submit',
+          btnLabel: 'Sign Up',
+          btnId: 'signup-btn'
+        })
+      %>
 
       <p class="already-registered-label">
         Already registered?

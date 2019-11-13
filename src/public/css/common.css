@@ -144,31 +144,75 @@ p, h1, h3 {
     font-size: 3rem;
 }
 
-button.btn,
-a.btn {
-    padding: 12px 10px;
-    font-size: 1.5rem;
+.load-btn-container {
+    margin-top: 15px;
+}
+
+button,
+a.load-btn {
+    padding: 15px 10px;
+    border: none;
+    width: 170px;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    position: relative;
+    color: #fff;
+    background-color: var(--navbar-green);
     cursor: pointer;
-    background-color: #fff;
-    color: var(--navbar-green);
-    border-radius: 5px;
     outline: none;
-    border: 2px solid var(--navbar-green);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.15s linear;
+    box-sizing: border-box;
     text-decoration: none;
 }
 
-button.btn:hover,
-a.btn:hover {
+button::before,
+a::before {
+    content: '';
+    background-color: #eee;
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    opacity: 0;
+}
+
+input:checked ~ .load-btn {
+    background-color: #999 !important;
+    border-color: #999 !important;
+    color: #555 !important;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+input:checked ~ .load-btn::before {
+    opacity: 1;
+}
+
+.load-btn:hover {
     background-color: var(--hover-green);
     color: #fff;
 }
 
-button.btn.disable-control {
+.load-btn::before {
+    left: 0;
+    width: 10px;
+}
+
+@keyframes load {
+    from { left: 0; }
+    to { left: calc(100% - 10px); }
+}
+
+.load-activator:checked ~ .load-btn::before {
+    animation: load 0.6s ease-in-out 0s infinite alternate;
+}
+
+/* button.btn.disable-control {
     background-color: lightgray;
     color: #000;
     border-color: lightgray;
     pointer-events: none;
-}
+} */
 
 .error-msg {
     color: red;

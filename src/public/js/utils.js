@@ -53,8 +53,8 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
             return;
         }
 
-        // disable submit btn and show loading image
-        toggleSubmitBtnAndLoadingImg($form);
+        // // disable submit btn and show loading image
+        // toggleSubmitBtnAndLoadingImg($form);
         // remove form's invalid state if form was invalid before submission
         removeFormInvalidState($form);
 
@@ -75,7 +75,7 @@ export const addFormSubmitEventListener = ($form, requestUrl, passCsrfToken, cal
             let response = await fetch(requestUrl, request);
             response = await response.json();
             // enable submit btn and hide loading image
-            toggleSubmitBtnAndLoadingImg($form);
+            // toggleSubmitBtnAndLoadingImg($form);
 
             if (response.status.toLowerCase() === 'error') {
                 // for each error object in error response array
@@ -109,7 +109,27 @@ export const removeInvalidState = (e) => {
     $errorMsg.classList.remove('show-msg-block');
 };
 
-function toggleSubmitBtnAndLoadingImg($form) {
-    $form.querySelector('#form-submit-btn').classList.toggle('disable-control');
-    $form.querySelector('#loading-img').classList.toggle('show-loading-img');
-}
+/**
+ * start loading animation on submit button in forms. When form doesn't have any
+ * empty input field on submission, play the animation by checking hidden input element
+ *
+ * @param {button html element} $btn - button on which to attach the click event listener
+ * @param  {NodeList of html input elements} inputFields - input fields of the form which contains
+ * $btn element
+ */
+export const startBtnLoadingState = ($btn, inputFields) => {
+    $btn.addEventListener('click', (e) => {
+        let isAnyInputFieldEmpty = false;
+
+        for (let i=0; i<inputFields.length; i++) {
+            if (inputFields[i].value.length <= 0) {
+                isAnyInputFieldEmpty = true;
+                break;
+            }
+        }
+
+        if (!isAnyInputFieldEmpty) {
+            document.getElementById('load-activator').checked = true;
+        }
+    });
+};

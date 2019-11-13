@@ -1,9 +1,16 @@
-import { addFormSubmitEventListener, removeInvalidState } from '../utils.js';
+import { addFormSubmitEventListener, removeInvalidState, startBtnLoadingState } from '../utils.js';
 
 const $signupForm = document.getElementById('signup-form');
+const $signupBtn = document.getElementById('signup-btn');
+const $loadActivator = document.getElementById('load-activator');
 const requestUrl = 'http://localhost:3000/signup';
 
+startBtnLoadingState($signupBtn, document.querySelectorAll('input'));
+
 addFormSubmitEventListener($signupForm, requestUrl, false, (response) => {
+    // remove signup button loading state
+    $loadActivator.checked = false;
+
     if (response.status.toLowerCase() === 'success') {
         document.getElementById('success-msg-block').classList.add('show-msg-block');
 

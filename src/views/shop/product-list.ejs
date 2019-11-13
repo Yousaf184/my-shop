@@ -5,7 +5,7 @@
     <h1 class="page-title">Products</h1>
 
     <% if (productsArr.length > 0) { %>
-      <section class="products-container">
+      <section class="products-container" id="products-container">
         <% for (let product of productsArr) { %>
           <div class="product">
             <img src="<%= product.imagePath %>" placeholder="product"/>
@@ -25,5 +25,7 @@
     <% } else { %>
       <span class="info-msg error-msg-block show-msg-block">No products found</span>
     <% } %>
+
+    <script src="/js/product.js"></script>
 
 <%- include('../partials/foot.ejs') %>

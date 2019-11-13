@@ -10,10 +10,6 @@
     padding: 20px 15px;
 }
 
-.product button {
-    font-size: 1.3rem;
-}
-
 .product {
     width: 85%;
     max-width: 285px;
@@ -33,26 +29,53 @@
     padding: 13px 10px;
 }
 
+div.load-btn-container {
+    margin-top: 0;
+    padding: 0;
+}
+
+.load-btn {
+    background-color: transparent;
+    border: 1px solid var(--navbar-green);
+    color: var(--navbar-green);
+    padding: 10px;
+}
+
+.products-container-admin .load-btn {
+    padding: 8px 15px;
+    width: 70px;
+    text-align: center;
+}
+
+.products-container-admin a.load-btn {
+    background-color: transparent;
+    color: var(--navbar-green);
+    border: 1px solid var(--navbar-green);
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.products-container-admin a.load-btn:hover {
+    background-color: var(--hover-green);
+    color: #fff;
+}
+
 .product .btns-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
     padding-top: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.product .btns-container a {
-    padding: 10px 10px;
-}
-
-.btns-container a:first-child {
-    margin-right: 15px;
-}
-
-.btns-container .delete-btn {
+.btns-container #delete-product-btn {
     color: var(--delete-red);
     border-color: var(--delete-red);
 }
 
-.btns-container .delete-btn:hover {
+.btns-container #delete-product-btn:hover {
     background-color: var(--delete-hover-red);
     color: #fff;
 }

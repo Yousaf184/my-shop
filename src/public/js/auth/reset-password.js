@@ -1,10 +1,17 @@
-import { addFormSubmitEventListener, removeInvalidState } from '../utils.js';
+import { addFormSubmitEventListener, removeInvalidState, startBtnLoadingState } from '../utils.js';
 
 const $resetPasswordForm = document.getElementById('password-reset-form');
+const $resetPasswordBtn = document.getElementById('reset-password-btn');
+const $loadActivator = document.getElementById('load-activator');
 const requestUrl = 'http://localhost:3000/reset-password';
 
+startBtnLoadingState($resetPasswordBtn, document.querySelectorAll('input'));
+
 addFormSubmitEventListener($resetPasswordForm, requestUrl, false, (response) => {
-    // if response contains 'isValidationError' propery, don't hide the password reset form
+    // remove signup button loading state
+    $loadActivator.checked = false;
+
+    // if response contains 'isValidationError' property, don't hide the password reset form
     if (typeof response.isValidationError !== 'undefined' && response.isValidationError !== null) {
         return;
     }

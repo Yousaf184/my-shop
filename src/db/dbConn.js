@@ -10,7 +10,8 @@ const connectToDB = async () => {
         if (mongoose.connection.readyState !== mongoose.connection.states.connected) {
             const connectionOptions = {
                 useNewUrlParser: true,
-                useCreateIndex: true
+                useCreateIndex: true,
+                useUnifiedTopology: true
             };
 
             await mongoose.connect(process.env.MONGODB_CONNECTION_STR, connectionOptions);

@@ -45,7 +45,7 @@
               </form>
             </div>
             <form action="/cart/remove" method="POST" class="remove-product-control">
-              <button type="submit" class="btn">&cross;</button>
+              <button type="submit" class="btn">x</button>
               <input type="hidden" name="productIdField" value="<%= product.productId %>">
               <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             </form>

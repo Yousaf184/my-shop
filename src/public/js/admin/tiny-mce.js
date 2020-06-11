@@ -6,8 +6,9 @@ tinymce.init({
             editor.save();
         });
     },
-    resize: false,
+    resize: true,
     height: 400,
+    width: '100%',
     plugins: [
         'autolink autosave charmap code emoticons fullscreen hr image',
         'insertdatetime link lists preview searchreplace spellchecker table toc wordcount'

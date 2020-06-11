@@ -15,7 +15,9 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-p, h1, h3 {
+p,
+h1,
+h3 {
     margin: 0;
 }
 
@@ -149,7 +151,8 @@ p, h1, h3 {
 }
 
 button,
-a.load-btn {
+a.load-btn,
+.btn {
     padding: 15px 10px;
     border: none;
     width: 170px;
@@ -199,8 +202,12 @@ input:checked ~ .load-btn::before {
 }
 
 @keyframes load {
-    from { left: 0; }
-    to { left: calc(100% - 10px); }
+    from {
+        left: 0;
+    }
+    to {
+        left: calc(100% - 10px);
+    }
 }
 
 .load-activator:checked ~ .load-btn::before {

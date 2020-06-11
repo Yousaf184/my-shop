@@ -5,27 +5,36 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_TEST_API_KEY);
 const Product = require('../models/product');
 const Order = require('../models/order');
 const User = require('../models/user');
-const { standardResponse, getAllProductsWithPaginationInfo } = require('../utils/utils');
+const {
+    standardResponse,
+    getAllProductsWithPaginationInfo
+} = require('../utils/utils');
 
 const showProductList = async (req, res, next) => {
     try {
         let pageNumber = parseInt(req.query.page) || 1;
         const productsPerPage = 8;
 
-        const data = await getAllProductsWithPaginationInfo(pageNumber, productsPerPage, null);
+        const data = await getAllProductsWithPaginationInfo(
+            pageNumber,
+            productsPerPage,
+            null
+        );
 
         // if user is authenticated, hide 'add to cart' button for those products
         // which are already in user's cart
         // display 'added to cart' text instead
         if (req.session.isAuthenticated) {
-            const user = await User.findOne({ email: req.session.email }).select('cart');
+            const user = await User.findOne({
+                email: req.session.email
+            }).select('cart');
 
             data.productsArr.forEach((prod) => {
                 user.cart.forEach((cartProd) => {
                     if (prod._id.toString() === cartProd.productId.toString()) {
                         prod.isInCart = true;
                     }
-                })
+                });
             });
         }
 
@@ -38,7 +47,6 @@ const showProductList = async (req, res, next) => {
             nextPage: data.nextPage,
             lastPage: data.lastPage
         });
-
     } catch (error) {
         next(error);
     }
@@ -49,7 +57,10 @@ const showProductDetails = async (req, res, next) => {
 
     try {
         const product = await Product.findOne({ _id: productId });
-        const user = await User.findOne({ email: req.session.email, 'cart.productId': productId });
+        const user = await User.findOne({
+            email: req.session.email,
+            'cart.productId': productId
+        });
 
         // to disable/enable 'add to cart' button
         product.isInCart = user ? true : false;
@@ -57,9 +68,8 @@ const showProductDetails = async (req, res, next) => {
         res.render('./shop/product-details', {
             activePath: '/product-details',
             pageTitle: product.name,
-            product: product,
+            product: product
         });
-
     } catch (error) {
         next(error);
     }
@@ -68,8 +78,8 @@ const showProductDetails = async (req, res, next) => {
 const showCart = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.session.email })
-                               .select('cart')
-                               .populate('cart.productId', 'name price imagePath');
+            .select('cart')
+            .populate('cart.productId', 'name price imagePath');
 
         const cartProducts = [];
 
@@ -88,7 +98,6 @@ const showCart = async (req, res, next) => {
             activePath: '/cart',
             products: cartProducts
         });
-
     } catch (error) {
         next(error);
     }
@@ -101,7 +110,7 @@ const postCart = async (req, res, next) => {
         const user = await User.findOne({ email: req.session.email });
 
         // check if product is already in cart or not
-        const index = user.cart.findIndex(prod => {
+        const index = user.cart.findIndex((prod) => {
             return prod.productId.toString() === productId;
         });
 
@@ -112,7 +121,6 @@ const postCart = async (req, res, next) => {
         }
 
         res.redirect('/');
-
     } catch (error) {
         next(error);
     }
@@ -123,7 +131,9 @@ const removeProductFromCart = async (req, res, next) => {
 
     try {
         const user = await User.findOne({ email: req.session.email });
-        const index = user.cart.findIndex(prod => prod.productId.toString() === productId);
+        const index = user.cart.findIndex(
+            (prod) => prod.productId.toString() === productId
+        );
 
         if (index !== -1) {
             user.cart.splice(index, 1);
@@ -131,7 +141,6 @@ const removeProductFromCart = async (req, res, next) => {
 
         await user.save();
         res.redirect('/cart');
-
     } catch (error) {
         next(error);
     }
@@ -160,7 +169,9 @@ const showMyOrdersPage = async (req, res, next) => {
             myOrders.push({ orderNumber: order._id });
 
             // format createdAt date
-            const createdAt = moment(new Date(order.createdAt)).format("dddd, MMMM Do YYYY, h:mm:ssA");
+            const createdAt = moment(new Date(order.createdAt)).format(
+                'dddd, MMMM Do YYYY, h:mm:ssA'
+            );
 
             myOrders[index].createdAt = createdAt;
             myOrders[index].products = [];
@@ -173,7 +184,7 @@ const showMyOrdersPage = async (req, res, next) => {
                 });
 
                 // add (product price * quantity) to grand total
-                orderGrandTotal = orderGrandTotal + (prod.price * prod.quantity);
+                orderGrandTotal = orderGrandTotal + prod.price * prod.quantity;
             });
 
             // add grandTotal property to current order object
@@ -189,7 +200,6 @@ const showMyOrdersPage = async (req, res, next) => {
             activePath: '/orders',
             orders: myOrders
         });
-
     } catch (error) {
         next(error);
     }
@@ -198,8 +208,8 @@ const showMyOrdersPage = async (req, res, next) => {
 const showCheckoutPage = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.session.email })
-                               .select('cart')
-                               .populate('cart.productId', 'name price imagePath');
+            .select('cart')
+            .populate('cart.productId', 'name price imagePath');
 
         const cart = user.cart;
         const checkoutProducts = [];
@@ -213,7 +223,7 @@ const showCheckoutPage = async (req, res, next) => {
                 quantity: product.quantity
             });
 
-            grandTotal += (product.productId.price * product.quantity);
+            grandTotal += product.productId.price * product.quantity;
         });
 
         res.render('./shop/checkout', {
@@ -222,7 +232,6 @@ const showCheckoutPage = async (req, res, next) => {
             productsArr: checkoutProducts,
             grandTotal: grandTotal
         });
-
     } catch (error) {
         next(error);
     }
@@ -236,8 +245,8 @@ const order = async (req, res) => {
 
     try {
         const user = await User.findOne({ email: req.session.email })
-                               .select('cart')
-                               .populate('cart.productId', 'name quantity price');
+            .select('cart')
+            .populate('cart.productId', 'name quantity price');
 
         const products = [];
         // calculate total order price and fill products array
@@ -249,7 +258,7 @@ const order = async (req, res) => {
                 price: curr.productId.price
             });
 
-            return acc += (curr.productId.price * curr.quantity);
+            return (acc += curr.productId.price * curr.quantity);
         }, 0);
 
         // save order record
@@ -265,7 +274,10 @@ const order = async (req, res) => {
             currency: 'usd',
             description: 'Demo charge',
             source: token,
-            metadata: { order_id: order._id.toString(), userEmail: req.session.email }
+            metadata: {
+                order_id: order._id.toString(),
+                userEmail: req.session.email
+            }
         });
 
         // remove cart items
@@ -274,7 +286,6 @@ const order = async (req, res) => {
 
         // redirect user from client side
         res.status(400).send(standardResponse('success', 'payment completed'));
-
     } catch (error) {
         // roll back the entry made in orders collection
         await Order.deleteOne({ _id: order._id });
@@ -286,13 +297,21 @@ const generateOrderInvoice = async (req, res, next) => {
     const orderId = req.params.orderId;
     const invoiceName = 'invoice-' + orderId + '.pdf';
     //const invoiceFilePath = path.join(__dirname, '..', 'invoices', invoiceName);
-    const fontDirectory = path.join(__dirname, '..', 'invoices', 'font', 'Roboto');
+    const fontDirectory = path.join(
+        __dirname,
+        '..',
+        'invoices',
+        'font',
+        'Roboto'
+    );
 
     try {
         const order = await Order.findOne({ _id: orderId });
 
         // format createdAt date
-        const createdAt = moment(new Date(order.createdAt)).format("ddd, MMM Do YYYY, h:mm:ssA");
+        const createdAt = moment(new Date(order.createdAt)).format(
+            'ddd, MMM Do YYYY, h:mm:ssA'
+        );
 
         const orderProducts = order.products.map((item) => {
             return [item.name, item.price, item.quantity];
@@ -300,7 +319,7 @@ const generateOrderInvoice = async (req, res, next) => {
 
         // calculate invoice grand total
         const total = orderProducts.reduce((acc, curr) => {
-            return acc + (curr[1] * curr[2]);
+            return acc + curr[1] * curr[2];
         }, 0);
 
         // set font setting for pdfmake
@@ -326,14 +345,26 @@ const generateOrderInvoice = async (req, res, next) => {
                     columns: [
                         {
                             text: [
-                                {text: 'Order Number #', style: 'orderMetaInfo'},
-                                {text: `${order._id}`, style: ['orderMetaInfo', 'notBold']}
+                                {
+                                    text: 'Order Number #',
+                                    style: 'orderMetaInfo'
+                                },
+                                {
+                                    text: `${order._id}`,
+                                    style: ['orderMetaInfo', 'notBold']
+                                }
                             ]
                         },
                         {
                             text: [
-                                {text: `Order Date: `, style: ['orderMetaInfo', 'toRight']},
-                                {text: `${createdAt}`, style: ['orderMetaInfo', 'notBold']}
+                                {
+                                    text: `Order Date: `,
+                                    style: ['orderMetaInfo', 'toRight']
+                                },
+                                {
+                                    text: `${createdAt}`,
+                                    style: ['orderMetaInfo', 'notBold']
+                                }
                             ]
                         }
                     ],
@@ -341,7 +372,7 @@ const generateOrderInvoice = async (req, res, next) => {
                 },
                 {
                     svg: `<svg height="10" width="687">
-                            <line x1="0" y1="0" x2="687" y2="0" style="stroke:rgb(0,0,0);stroke-width:2" />
+                            <line x1="0" y1="0" x2="515" y2="0" style="stroke:rgb(0,0,0);stroke-width:2" />
                           </svg>`
                 },
                 {
@@ -352,9 +383,9 @@ const generateOrderInvoice = async (req, res, next) => {
                         widths: [350, '*', '*'],
                         body: [
                             [
-                                {text: 'Products', style: 'tableHeader'},
-                                {text: 'Price', style: 'tableHeader'},
-                                {text: 'Quantity', style: 'tableHeader'}
+                                { text: 'Products', style: 'tableHeader' },
+                                { text: 'Price', style: 'tableHeader' },
+                                { text: 'Quantity', style: 'tableHeader' }
                             ],
                             ...orderProducts
                         ]
@@ -374,7 +405,7 @@ const generateOrderInvoice = async (req, res, next) => {
                 },
                 orderMetaInfo: {
                     fontSize: 9.5,
-                    bold: true,
+                    bold: true
                 },
                 marginBottom: {
                     marginBottom: 5
@@ -408,14 +439,16 @@ const generateOrderInvoice = async (req, res, next) => {
 
         // set headers to serve the pdf document in the browser
         res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'inline; filename="' + invoiceName + '"');
+        res.setHeader(
+            'Content-Disposition',
+            'inline; filename="' + invoiceName + '"'
+        );
 
         // save file on server in streams
         //pdfDoc.pipe(fs.createWriteStream(invoiceFilePath));
         // serve the file to the client browser in streams
         pdfDoc.pipe(res);
         pdfDoc.end();
-
     } catch (error) {
         next(error);
     }
@@ -428,7 +461,7 @@ const changeProdQuantityInCart = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.session.email });
 
-        user.cart.forEach(prod => {
+        user.cart.forEach((prod) => {
             if (prod.productId.toString() === productId) {
                 if (changeQuantity.toLowerCase() === 'increase') {
                     prod.quantity += 1;
@@ -439,8 +472,9 @@ const changeProdQuantityInCart = async (req, res, next) => {
         });
 
         await user.save();
-        res.status(200).send(standardResponse('success', 'cart product quantity changed'));
-
+        res.status(200).send(
+            standardResponse('success', 'cart product quantity changed')
+        );
     } catch (error) {
         next(error);
     }

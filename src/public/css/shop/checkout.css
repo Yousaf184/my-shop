@@ -14,6 +14,7 @@
 .checkout-product-info-container {
     display: flex;
     flex-direction: column;
+    font-size: 1.5rem;
 }
 
 .product-name-container {
@@ -27,7 +28,7 @@
 
 .product-name-container .name {
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 2rem;
 }
 
 .grand-total-container {
@@ -43,11 +44,12 @@
 
 .total-label {
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 2rem;
 }
 
 .total {
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 2rem;
     padding-left: 4px;
 }
 
@@ -120,7 +122,7 @@
  * The CSS shown here will not be introduced in the Quickstart guide, but shows
  * how you can use CSS to style your Element's container.
  */
- .StripeElement {
+.StripeElement {
     box-sizing: border-box;
     width: 100%;
     padding: 18px 15px;

@@ -34,7 +34,7 @@
 		"stripe": "^7.15.0",
 		"svg-to-pdfkit": "^0.1.8",
 		"uuid": "^3.4.0",
-		"validator": "^11.1.0"
+		"validator": "^13.7.0"
 	},
 	"devDependencies": {
 		"cheerio": "^1.0.0-rc.3",
